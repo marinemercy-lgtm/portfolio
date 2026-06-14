@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mercy Marine — Product &amp; Service Design</title>
+<meta name="description" content="Mercy Marine designs products and services for the people who run public institutions. Selected work in user-centred design for government and public-sector contexts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&family=Poppins:wght@500;600;700&family=Mulish:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ---- portfolio palette (personal brand) ---- */
+    --ink:#14342B;        /* deep forest green — dominant text + dark sections */
+    --ink-soft:#26463C;   /* softer ink for large fills */
+    --paper:#F7F6F1;      /* warm off-white background (not cream) */
+    --card:#FFFFFF;
+    --teal:#1F7776;       /* supporting accent — links, themes */
+    --amber:#E8890C;      /* single sharp accent, used sparingly */
+    --muted:#657269;      /* muted green-grey — captions, secondary */
+    --line:#E3E1D8;       /* hairline */
+    --line-ink:rgba(255,255,255,.16);
+
+    --display:'Bricolage Grotesque', system-ui, sans-serif;
+    --body:'Inter', system-ui, sans-serif;
+    --mono:'Spline Sans Mono', ui-monospace, monospace;
+
+    --wrap:1080px;
+    --gap:clamp(64px,8vw,128px);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--body);font-size:17px;line-height:1.65;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(22px,5vw,48px)}
+
+  /* ---------- shared type ---------- */
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;font-weight:500;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--teal);
+  }
+  h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.04;letter-spacing:-.015em}
+  a{color:inherit}
+  .lead{font-size:clamp(18px,2vw,21px);line-height:1.6;color:var(--ink-soft)}
+  .muted{color:var(--muted)}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:40;background:rgba(247,246,241,.86);
+    backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line);
+  }
+  .topbar .row{display:flex;align-items:baseline;justify-content:space-between;
+    padding:15px 0;font-family:var(--mono);font-size:13px;letter-spacing:.02em}
+  .topbar .name{font-weight:600;letter-spacing:.01em}
+  .topbar nav a{margin-left:22px;color:var(--muted);text-decoration:none}
+  .topbar nav a:hover{color:var(--ink)}
+  @media(max-width:620px){.topbar nav{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:clamp(72px,12vw,140px) 0 clamp(56px,8vw,96px)}
+  .hero h1{
+    font-size:clamp(40px,7.4vw,82px);font-weight:800;max-width:16ch;margin:22px 0 0;
+  }
+  .hero h1 em{font-style:normal;color:var(--amber)}
+  .hero .lead{max-width:54ch;margin-top:28px}
+  .meta{
+    margin-top:42px;display:flex;flex-wrap:wrap;gap:10px 26px;
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--muted);
+    padding-top:24px;border-top:1px solid var(--line);
+  }
+  .meta b{color:var(--ink);font-weight:600}
+
+  /* ---------- section frame ---------- */
+  section{padding:var(--gap) 0}
+  .cs-head{display:flex;gap:clamp(20px,4vw,56px);align-items:flex-start;margin-bottom:48px}
+  .cs-num{font-family:var(--mono);font-size:14px;color:var(--amber);font-weight:600;padding-top:10px;white-space:nowrap}
+  .cs-head h2{font-size:clamp(28px,4.4vw,46px)}
+  .cs-head .lead{margin-top:18px;max-width:58ch}
+
+  /* meta grid (role/context/year) */
+  .factgrid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:8px 0 44px;
+  }
+  .factgrid div{background:var(--paper);padding:18px 20px}
+  .factgrid .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .factgrid .v{margin-top:7px;font-weight:600;color:var(--ink);line-height:1.4;font-size:15.5px}
+  @media(max-width:680px){.factgrid{grid-template-columns:1fr}}
+
+  /* process spine */
+  .spine{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 44px}
+  .spine span{
+    font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--ink);
+    background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .spine span i{font-style:normal;color:var(--amber);font-weight:600}
+  .spine .arr{border:none;background:none;color:var(--muted);padding:7px 0;align-self:center}
+
+  /* narrative */
+  .prose{max-width:64ch}
+  .prose h3{font-family:var(--display);font-size:21px;font-weight:700;margin:40px 0 12px}
+  .prose p{margin-bottom:18px}
+  .prose p+p{margin-top:-2px}
+
+  /* stat callouts */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:48px 0}
+  .stat .n{font-family:var(--display);font-size:clamp(34px,5vw,52px);font-weight:800;line-height:1;color:var(--ink)}
+  .stat .n small{font-size:.5em;color:var(--amber);font-weight:700;vertical-align:super;margin-left:2px}
+  .stat .l{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.45}
+  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr);gap:26px 18px}}
+
+  /* theme chips */
+  .themes{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 8px}
+  .themes b{
+    font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.02em;
+    color:var(--teal);background:rgba(31,119,118,.08);border:1px solid rgba(31,119,118,.22);
+    border-radius:8px;padding:7px 12px;
+  }
+  .themes b span{color:var(--muted);margin-left:7px}
+
+  /* persona + insight cards */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:40px 0}
+  @media(max-width:760px){.twocol{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 28px}
+  .panel .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-weight:600}
+  .panel h3{font-family:var(--display);font-size:22px;font-weight:700;margin:8px 0 4px}
+  .panel .role{font-size:13.5px;color:var(--muted);margin-bottom:16px}
+  .panel ul{list-style:none;margin:0}
+  .panel li{position:relative;padding-left:18px;margin-bottom:9px;font-size:15px;color:var(--ink-soft);line-height:1.5}
+  .panel li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  .panel .quote{font-family:var(--display);font-size:17px;font-weight:500;color:var(--ink);line-height:1.45;border-left:3px solid var(--amber);padding-left:16px;margin-top:6px}
+
+  /* dark proposition block */
+  .dark{background:var(--ink);color:#EFEDE3;border-radius:20px;padding:clamp(30px,4.5vw,52px)}
+  .dark .eyebrow{color:#7FC0A7}
+  .dark h3{font-family:var(--display);color:#fff;font-size:clamp(22px,3.2vw,30px);font-weight:700;margin:14px 0 18px;max-width:24ch}
+  .dark p{color:#CDD8CF;max-width:60ch}
+  .dark .tmpl{font-family:var(--mono);font-size:14px;line-height:1.9;color:#EFEDE3;margin-top:22px;background:var(--ink-soft);border:1px solid var(--line-ink);border-radius:12px;padding:20px 22px}
+  .dark .tmpl em{color:var(--amber);font-style:normal}
+
+  /* service blueprint */
+  .blueprint{margin:8px 0 12px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
+  .bp-persona{background:var(--ink);color:#EFEDE3;padding:24px clamp(22px,3.5vw,34px)}
+  .bp-persona .bp-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:#7FC0A7}
+  .bp-persona strong{display:block;font-family:var(--display);font-size:clamp(22px,3vw,28px);font-weight:700;color:#fff;margin:8px 0 6px}
+  .bp-persona .bp-sub{font-size:15px;color:#CDD8CF;max-width:62ch;display:block}
+  .bp-phases{display:grid;grid-template-columns:repeat(3,1fr)}
+  .bp-phase{padding:26px clamp(20px,3vw,30px);border-right:1px solid var(--line);position:relative}
+  .bp-phase:last-child{border-right:none}
+  .bp-phase .bp-n{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--amber)}
+  .bp-phase h4{font-family:var(--display);font-size:19px;font-weight:700;margin:8px 0 8px;letter-spacing:-.01em}
+  .bp-phase p{font-size:14.5px;color:var(--ink-soft);line-height:1.55}
+  .bp-touch{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:16px clamp(20px,3vw,30px);border-top:1px solid var(--line);background:var(--paper)}
+  .bp-touch .bp-touchlabel{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+  .bp-touch span:not(.bp-touchlabel){font-family:var(--mono);font-size:12px;color:var(--teal);background:rgba(31,119,118,.08);border:1px solid rgba(31,119,118,.2);border-radius:7px;padding:5px 11px}
+  @media(max-width:720px){.bp-phases{grid-template-columns:1fr}.bp-phase{border-right:none;border-bottom:1px solid var(--line)}.bp-phase:last-child{border-bottom:none}}
+
+  /* impact band */
+  .impact{background:var(--ink);color:#EFEDE3;border-radius:20px;padding:clamp(30px,4.5vw,50px);display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,4vw,56px);align-items:center}
+  .impact-head h3{font-family:var(--display);color:#fff;font-size:clamp(24px,3.4vw,34px);font-weight:800;margin:14px 0 14px;max-width:18ch}
+  .impact-head p{color:#CDD8CF;font-size:15.5px;max-width:48ch}
+  .impact-stats{display:flex;flex-direction:column;gap:20px}
+  .impact-stats div{border-left:3px solid var(--amber);padding-left:18px}
+  .impact-stats .in{display:block;font-family:var(--display);font-size:clamp(30px,4vw,42px);font-weight:800;color:#fff;line-height:1}
+  .impact-stats .il{display:block;font-size:13.5px;color:#9DB0A4;margin-top:6px}
+  @media(max-width:760px){.impact{grid-template-columns:1fr;gap:28px}}
+
+  /* dark numbers band */
+  .numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ink-soft);border-radius:18px;overflow:hidden;margin-top:8px}
+  .numbers > div{background:var(--ink);padding:28px clamp(16px,2.4vw,28px)}
+  .numbers .in{display:block;font-family:var(--display);font-size:clamp(28px,3.6vw,40px);font-weight:800;color:#fff;line-height:1}
+  .numbers .il{display:block;font-size:13px;color:#9DB0A4;margin-top:8px;line-height:1.4}
+  @media(max-width:760px){.numbers{grid-template-columns:repeat(2,1fr)}}
+
+  /* designer's reflection */
+  .reflection{margin-top:30px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(26px,3.5vw,40px)}
+  .reflection .eyebrow{color:var(--amber)}
+  .reflection h3{font-family:var(--display);font-size:clamp(20px,2.6vw,27px);font-weight:700;margin:12px 0 16px;letter-spacing:-.01em;max-width:28ch}
+  .reflection p{max-width:66ch;color:var(--ink-soft);margin-bottom:15px}
+  .reflection p.close{color:var(--ink);font-family:var(--display);font-weight:600;font-size:18px;line-height:1.4;margin-top:20px;margin-bottom:0;max-width:54ch}
+
+  /* component showcase intro */
+  .demo-note{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;color:var(--muted);margin:0 0 18px}
+  .demo-note::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--amber);flex:none}
+  .demo-wrap{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3.5vw,40px);margin-bottom:26px}
+  .demo-wrap .cap{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .demo-wrap .cap b{color:var(--teal);font-weight:600}
+
+  /* footer */
+  footer{background:var(--ink);color:#EFEDE3;padding:clamp(60px,9vw,110px) 0}
+  footer .eyebrow{color:#7FC0A7}
+  footer h2{color:#fff;font-size:clamp(30px,5vw,56px);font-weight:800;margin:18px 0 28px;max-width:18ch}
+  footer a.mail{font-family:var(--mono);font-size:13px;font-weight:600;color:#fff;text-decoration:none;border-bottom:2px solid var(--amber);padding-bottom:2px}
+  footer a.mail:hover{color:var(--amber)}
+  footer .frow{display:flex;flex-wrap:wrap;gap:14px 34px;margin-top:40px;font-family:var(--mono);font-size:13px;color:#9DB0A4;padding-top:26px;border-top:1px solid var(--line-ink)}
+  footer .frow a{color:#CDD8CF;text-decoration:none}
+  footer .frow a:hover{color:#fff}
+
+  /* reveal */
+  body.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  body.js .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    body.js .rv{opacity:1;transform:none;transition:none}
+  }
+  :focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:4px}
+
+  /* ============================================================
+     EMBEDDED AMI COMPONENTS — namespaced under .amicomp
+     Own palette + Poppins/Mulish, isolated from portfolio chrome
+     ============================================================ */
+  .amicomp{
+    --a-green:#0E6B43; --a-green2:#0A4F32; --a-amber:#F6B100;
+    --a-red:#E0301E; --a-paper:#F4F5F2; --a-card:#fff; --a-ink:#16241C;
+    --a-line:#E6E7E2; --a-good:#1FA463;
+    font-family:'Mulish',system-ui,sans-serif;color:var(--a-ink);
+  }
+  .amicomp .head-f{font-family:'Poppins',sans-serif}
+
+  /* flip cards */
+  .fc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:720px){.fc-grid{grid-template-columns:1fr}}
+  .fc{perspective:1400px;border:0;background:none;padding:0;cursor:pointer;font:inherit;text-align:left;display:block;width:100%}
+  .fc-inner{position:relative;width:100%;min-height:188px;transition:transform .6s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d}
+  .fc[aria-pressed="true"] .fc-inner{transform:rotateY(180deg)}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+  .fc-front{background:linear-gradient(150deg,var(--a-green) 0%,var(--a-green2) 100%);color:#fff;box-shadow:0 1px 0 var(--a-red),0 8px 24px rgba(14,107,67,.18);border-top:4px solid var(--a-red)}
+  .fc-back{background:var(--a-card);color:var(--a-ink);border:1px solid var(--a-line);border-top:4px solid var(--a-amber);transform:rotateY(180deg)}
+  .fc-eyebrow{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.92}
+  .fc-front .fc-eyebrow{color:var(--a-amber)}
+  .fc-back .fc-eyebrow{color:var(--a-green)}
+  .fc-prompt{font-family:'Poppins',sans-serif;font-weight:600;font-size:18px;line-height:1.3}
+  .fc-back p{font-size:14.5px;line-height:1.55}
+  .fc-flip{font-size:11px;font-weight:700;letter-spacing:.04em;opacity:.8}
+  @media(prefers-reduced-motion:reduce){.fc-inner{transition:none}}
+
+  /* ranking tool */
+  .rk{max-width:560px}
+  .rk-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .rk-item{display:flex;align-items:center;gap:12px;background:var(--a-card);
+    border:2px solid var(--a-red);border-radius:13px;padding:12px 14px;cursor:grab;
+    transition:transform .14s ease,box-shadow .14s ease}
+  .rk-item:active{cursor:grabbing}
+  .rk-item.dragging{opacity:.55}
+  .rk-item.lift{transform:scale(1.02);box-shadow:0 10px 26px rgba(0,0,0,.12)}
+  .rk-rank{font-family:'Poppins',sans-serif;font-weight:700;color:#fff;background:var(--a-green);
+    width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+  .rk-ico{width:30px;height:30px;flex:none;color:var(--a-green);display:flex;align-items:center;justify-content:center}
+  .rk-ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  .rk-label{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;flex:1;line-height:1.25}
+  .rk-label small{display:block;font-family:'Mulish',sans-serif;font-weight:500;font-size:12.5px;color:#69756E;margin-top:2px}
+  .rk-moves{display:flex;flex-direction:column;gap:3px;flex:none}
+  .rk-moves button{border:1px solid var(--a-line);background:#fff;border-radius:6px;width:26px;height:20px;
+    cursor:pointer;color:var(--a-green);display:flex;align-items:center;justify-content:center;padding:0}
+  .rk-moves button:hover:not(:disabled){background:var(--a-amber);border-color:var(--a-amber);color:var(--a-ink)}
+  .rk-moves button:disabled{opacity:.3;cursor:default}
+  .rk-moves svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .rk-bar{display:flex;gap:10px;margin-top:18px}
+  .rk-bar button{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;cursor:pointer;
+    border-radius:9px;padding:9px 16px;border:1.5px solid var(--a-green);background:#fff;color:var(--a-green)}
+  .rk-bar button.solid{background:var(--a-green);color:#fff}
+  .rk-bar button:hover{background:var(--a-amber);border-color:var(--a-amber);color:var(--a-ink)}
+  .rk-hint{font-family:'Mulish',sans-serif;font-size:12.5px;color:#69756E;margin-top:14px;line-height:1.5}
+  .rk-intro{font-family:'Mulish',sans-serif;font-size:14.5px;color:#3A4A42;margin:0 0 16px;line-height:1.55}
+  .rk-reflect{margin-top:20px;padding-top:18px;border-top:1px solid var(--a-line)}
+  .rk-reflect label{display:block;font-family:'Poppins',sans-serif;font-weight:600;font-size:14.5px;color:var(--a-ink);margin-bottom:9px;line-height:1.35}
+  .rk-reflect textarea{width:100%;font-family:'Mulish',sans-serif;font-size:14px;color:var(--a-ink);border:1.5px solid var(--a-line);border-radius:10px;padding:11px 13px;resize:vertical;background:#fff;line-height:1.5}
+  .rk-reflect textarea:focus{outline:none;border-color:var(--a-green);box-shadow:0 0 0 3px rgba(14,107,67,.12)}
+  .rk-reflect .rk-hint{margin-top:12px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap row">
+    <span class="name">Mercy Marine</span>
+    <nav>
+      <a href="#psfu">Government</a>
+      <a href="#yes">Scale</a>
+      <a href="#components">Interactive</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Selected work · Product &amp; service design</p>
+    <h1>I design products and services for the people who run <em>public institutions.</em></h1>
+    <p class="lead">Ten years of user-centred design across government, public-sector and donor-backed organisations in Africa and Europe. I turn field research into products that busy non-specialists can actually use, and build the reusable, accessible interfaces that carry them to scale.</p>
+    <div class="meta">
+      <span><b>Based</b> London, UK</span>
+      <span><b>Practice</b> Research · Service design · Interaction</span>
+      <span><b>Users</b> Civil servants · Entrepreneurs · Public-sector teams</span>
+      <span><b>Tools</b> HTML/CSS · Design systems · Articulate</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============== CASE STUDY 01 — PSFU ============== -->
+<section id="psfu">
+  <div class="wrap">
+    <div class="cs-head rv">
+      <span class="cs-num">01 / Government</span>
+      <div>
+        <h2>A field service that brings business support to Uganda's small businesses</h2>
+        <p class="lead">Designing, and then delivering, a credible way to reach small businesses for the Private Sector Foundation Uganda, the country's apex private-sector body, working alongside government and development partners.</p>
+      </div>
+    </div>
+
+    <div class="factgrid rv">
+      <div><div class="k">My role</div><div class="v">Led the work from user research through service design, the field-agent role and its training, into implementation</div></div>
+      <div><div class="k">Context</div><div class="v">Public-sector mandate, low-connectivity and multi-language market, donor-shaped incentives</div></div>
+      <div><div class="k">Output</div><div class="v">Research, personas, a service blueprint, the Growth Guide role and training, and a live rollout</div></div>
+    </div>
+
+    <div class="spine rv">
+      <span><i>01</i> Research</span><b class="arr">→</b>
+      <span><i>02</i> Personas</span><b class="arr">→</b>
+      <span><i>03</i> Proposition</span><b class="arr">→</b>
+      <span><i>04</i> Service design</span><b class="arr">→</b>
+      <span><i>05</i> Delivery</span>
+    </div>
+
+    <div class="prose rv">
+      <h3>The problem</h3>
+      <p>Uganda's business support market is fragmented and uneven. Most providers cluster around start-ups in cities, quality varies widely with no shared standard, and good services are unaffordable for the average small business without subsidy. By one interviewee's estimate, almost all available content is designed by international providers and misses local context, with revenue bands quoted in dollars rather than terms a Ugandan entrepreneur would recognise. The sector's goal is to reach 40,000 providers, but only if the offer is something they trust and can sustain.</p>
+
+      <h3>What I did</h3>
+      <p>I ran the research-to-product process end to end. I interviewed three customer types, providers, entrepreneurs, and funders, then clustered every finding into five recurring themes so the team could see where needs converged rather than reacting to anecdotes.</p>
+    </div>
+
+    <div class="themes rv" aria-label="Research themes">
+      <b>Sustainability &amp; finance</b>
+      <b>Quality</b>
+      <b>Accessibility</b>
+      <b>Fragmentation</b>
+      <b>Segmentation</b>
+    </div>
+
+    <div class="stats rv">
+      <div class="stat"><div class="n">10</div><div class="l">User interviews across three customer types</div></div>
+      <div class="stat"><div class="n">5</div><div class="l">Provider and end-user personas built from the research</div></div>
+      <div class="stat"><div class="n">5&#8211;10</div><div class="l">Small businesses each Growth Guide supports every month</div></div>
+      <div class="stat"><div class="n">40<small>k</small></div><div class="l">Providers the programme aims to reach nationwide</div></div>
+    </div>
+
+    <div class="twocol rv">
+      <div class="panel">
+        <span class="tag">Persona · Provider</span>
+        <h3>John, the part-time consultant</h3>
+        <p class="role">Single trainer, urban, smartphone but not an advanced user, works in Luganda and some English</p>
+        <ul>
+          <li>Paid mostly by NGOs and development funds; SMEs only pay for narrow, finance-linked tasks</li>
+          <li>No formal BDS training and patchy access to materials</li>
+          <li>Treats the work as a side income, with little reason to invest in quality standards</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag">Insight · Entrepreneur</span>
+        <h3>They want growth, not another course</h3>
+        <p class="role">End users are experienced specialists who lack the know-how to grow a business</p>
+        <p class="quote">"My goal is knowing how to grow my business and the link to more money. I don't want more training."</p>
+        <ul>
+          <li>Support feels short-term and rarely builds a business that lasts</li>
+          <li>Generic programmes don't address the specific technical problem in front of them</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prose rv">
+      <h3>Framing the work</h3>
+      <p>I moved the team off solutioning and onto a structured frame, taking each persona through problem, proposition, product, positioning and promotion in turn. Problem and positioning statements used fill-in templates so the language stayed in the user's words and the differentiator stayed explicit.</p>
+    </div>
+
+    <div class="dark rv">
+      <p class="eyebrow">The frame that anchored the design</p>
+      <h3>Decisions grounded in what we heard, not what we assumed</h3>
+      <p>Every proposition had to trace back to a named persona and a problem stated in their language. The templates kept the team honest and made trade-offs visible to funders and government partners who needed to trust the reasoning before committing.</p>
+      <div class="tmpl">
+        Problem &nbsp;·&nbsp; <em>BDS providers</em> find it hard to <em>attract finance for their SMEs</em><br>
+        when <em>serving early-stage entrepreneurs</em>, because <em>they can't validate their own quality</em>.<br><br>
+        Positioning &nbsp;·&nbsp; For <em>[persona]</em> who needs <em>[outcome]</em>, the offer is a <em>[category]</em><br>
+        that delivers <em>[benefit]</em>. Unlike alternatives, it is <em>[differentiator]</em>.
+      </div>
+    </div>
+
+    <div class="prose rv">
+      <h3>The service I designed</h3>
+      <p>The answer was not another platform feature, it was a person. I designed the Growth Guide: a trained local agent, recruited from the existing business-advice network and based at a district Growth Centre, who carries the support to small businesses rather than waiting for them to find it. I designed the role, the user journey behind it, and the training that prepares each Guide, so that a non-specialist in a low-connectivity district can run a credible diagnostic and point a business owner to the right help.</p>
+    </div>
+
+    <div class="blueprint rv" aria-label="Growth Guide service blueprint">
+      <div class="bp-persona">
+        <span class="bp-tag">The service · a human in the loop</span>
+        <strong>The Growth Guide</strong>
+        <span class="bp-sub">A trained local agent at a district Growth Centre, working with 5 to 10 small businesses a month on a tablet and phone.</span>
+      </div>
+      <div class="bp-phases">
+        <div class="bp-phase">
+          <span class="bp-n">01</span>
+          <h4>Recruit &amp; train</h4>
+          <p>Recruited from the local advice network, stipend-supported, and trained on the diagnostic and the digital tools.</p>
+        </div>
+        <div class="bp-phase">
+          <span class="bp-n">02</span>
+          <h4>Diagnose &amp; support</h4>
+          <p>Runs the diagnostic with each business, directs them to the right support and finance options, coaches on quick wins.</p>
+        </div>
+        <div class="bp-phase">
+          <span class="bp-n">03</span>
+          <h4>Track &amp; feed back</h4>
+          <p>Central-team check-ins and an annual re-diagnostic. Field data flows back to shape the next round of the programme.</p>
+        </div>
+      </div>
+      <div class="bp-touch">
+        <span class="bp-touchlabel">Touchpoints</span>
+        <span>Growth Centre, in person</span>
+        <span>Tablet &amp; phone</span>
+        <span>Mobile learning platform</span>
+        <span>Central team, remote</span>
+      </div>
+    </div>
+
+    <div class="prose rv">
+      <h3>Into delivery</h3>
+      <p>I led the implementation, not just the design. The Guides were recruited and trained, the diagnostic and journey went into the field, and the central support loop that keeps them effective is running now. The service is built to learn: each annual diagnostic refreshes what a business needs, and what Guides see on the ground feeds the iterative redesign of the programme. It is live and ongoing, so the headline impact figures are still to come.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CASE STUDY 02 — YES (Nigeria) ============== -->
+<section id="yes">
+  <div class="wrap">
+    <div class="cs-head rv">
+      <span class="cs-num">02 / Skills at scale</span>
+      <div>
+        <h2>Youth Entrepreneurship Support programme</h2>
+        <p class="lead">The learning programme behind Bank of Industry Nigeria's national Youth Entrepreneurship Support (YES) Programme. I designed it in 2016. It was still running in 2024.</p>
+      </div>
+    </div>
+
+    <div class="factgrid rv">
+      <div><div class="k">My role</div><div class="v">Designed the learning programme: the curriculum, the online courses and the learner journey</div></div>
+      <div><div class="k">Context</div><div class="v">A national youth entrepreneurship initiative with Bank of Industry Nigeria, delivered online at scale</div></div>
+      <div><div class="k">Status</div><div class="v">Designed in 2016, still in use eight years later</div></div>
+    </div>
+
+    <div class="prose rv">
+      <h3>The challenge</h3>
+      <p>Reach thousands of young would-be entrepreneurs across Nigeria with credible business training, deliver it online so it could scale, and do the hard part: keep people engaged all the way to completion. Online learning is notorious for drop-off, and a course nobody finishes teaches nobody.</p>
+      <h3>The design</h3>
+      <p>I built it as a self-paced library of focused courses rather than one long linear march, so learners could take the topics their own situation called for and come back as their needs changed. They completed five of the eighteen courses on average, the breadth tells you they were choosing by relevance, and they finished almost everything they started. A 98% completion rate, sustained across thousands of learners and several years, is the number I am proudest of, because in online learning completion is the thing that usually breaks.</p>
+    </div>
+
+    <div class="numbers rv" aria-label="Programme outcomes">
+      <div><span class="in">7,500</span><span class="il">young people trained</span></div>
+      <div><span class="in">98%</span><span class="il">completion rate on courses taken</span></div>
+      <div><span class="in">5 / 18</span><span class="il">courses completed on average</span></div>
+      <div><span class="in">8+ yrs</span><span class="il">still in use since 2016</span></div>
+    </div>
+
+    <div class="reflection rv">
+      <span class="eyebrow">Designer's reflection · motivation at scale</span>
+      <h3>What completion does, and does not, prove</h3>
+      <p>I have to be honest about what drove those numbers. The programme was funded by the Bank of Industry, and finishing the courses was the route to a shot at that funding. That made it competitive, and it pulled people all the way through. So the 98% is as much a story about incentive design as about the learning itself.</p>
+      <p>That is the uncomfortable part for a designer. A funding gateway gets you volume and completion fast, but completion is an output, not an outcome. A high finish rate can mean people learned and changed how they run their business, or it can mean they ticked the boxes that stood between them and the money. From the completion figure alone, you cannot tell which.</p>
+      <p>It also set up a gap I had to design around. Learners arrived for the funding, while the programme existed to build capability. Holding both honestly, meeting the expectation that brought people in without letting the course collapse into a hoop to jump through, is the real work when you build for motivation at scale.</p>
+      <p>The lesson I carry from it is to design for the outcome, not the proxy, and to measure accordingly. The most valuable thing this programme could still do is longitudinal: go back to those learners and test whether the learning actually changed their behaviour and their businesses, rather than treating completion as the finish line.</p>
+      <p class="close">Extrinsic motivation can fill a programme. Only evidence of behaviour change tells you it worked.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CASE STUDY 02 — COMPONENTS ============== -->
+<section id="components">
+  <div class="wrap">
+    <div class="cs-head rv">
+      <span class="cs-num">03 / Interactive</span>
+      <div>
+        <h2>A small system of reusable, branded learning components</h2>
+        <p class="lead">Much learning reaches people on a phone, inside a restrictive platform. I build self-contained, accessible components that survive those constraints, themed from one set of design tokens so a rebrand is a single change. Two of them are live below. Try them.</p>
+      </div>
+    </div>
+
+    <p class="demo-note rv">Working components, not screenshots. Click a card; drag or use the arrows to reorder.</p>
+
+    <!-- FLIP CARDS -->
+    <div class="demo-wrap amicomp rv">
+      <div class="cap"><span>Flip card · concept reveal</span><b>Click or press Enter to flip</b></div>
+      <div class="fc-grid">
+        <button class="fc" aria-pressed="false">
+          <div class="fc-inner">
+            <div class="fc-face fc-front">
+              <span class="fc-eyebrow">Key term</span>
+              <span class="fc-prompt">What is a value proposition?</span>
+              <span class="fc-flip">Tap to reveal →</span>
+            </div>
+            <div class="fc-face fc-back">
+              <span class="fc-eyebrow">Answer</span>
+              <p>The specific value a product brings a persona: the features and benefits that meet their stated problem better than the alternatives they already have.</p>
+            </div>
+          </div>
+        </button>
+        <button class="fc" aria-pressed="false">
+          <div class="fc-inner">
+            <div class="fc-face fc-front">
+              <span class="fc-eyebrow">Reflect</span>
+              <span class="fc-prompt">Whose words is your problem statement in?</span>
+              <span class="fc-flip">Tap to reveal →</span>
+            </div>
+            <div class="fc-face fc-back">
+              <span class="fc-eyebrow">Prompt</span>
+              <p>If it reads in your language rather than the user's, you're describing a solution you already like, not a problem they actually have.</p>
+            </div>
+          </div>
+        </button>
+        <button class="fc" aria-pressed="false">
+          <div class="fc-inner">
+            <div class="fc-face fc-front">
+              <span class="fc-eyebrow">Concept</span>
+              <span class="fc-prompt">Why segment before you design?</span>
+              <span class="fc-flip">Tap to reveal →</span>
+            </div>
+            <div class="fc-face fc-back">
+              <span class="fc-eyebrow">Answer</span>
+              <p>A market split by need, size and context tells you which persona to design for first, and which to deliberately leave out of scope for now.</p>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="prose rv" style="margin:8px 0 36px">
+      <h3>The problem: interactivity that actually teaches</h3>
+      <p>Online and blended programmes lose people to passive screens: watch a video, read a slide, click next. When they do add interactivity, the reflex is a multiple-choice question with a right answer and a tick or a cross. For factual recall that works. For leadership development it backfires.</p>
+      <p>Leadership judgement is contextual. There is rarely one correct answer, and a learner who senses they are being marked starts hunting for the response the system wants instead of thinking for themselves. The quiet pressure of getting it wrong is exactly what suppresses the honest reflection that growth depends on.</p>
+      <p>So for reflective content I reach for a ranking activity with no answer key. The learner orders the items by their own view, then justifies their top choice. Nothing is scored. Every order is defensible, which is what keeps it psychologically safe, and the work shifts from recall to reasoning. What a learner produces, their order and their justification, becomes the material a facilitator opens up with the group: why did you put adaptability above vision? The disagreement in the room is the point, not an error to correct.</p>
+    </div>
+
+    <div class="twocol rv" style="margin-top:0">
+      <div class="panel">
+        <span class="tag" style="color:var(--muted)">Default</span>
+        <h3>Multiple choice, marked right or wrong</h3>
+        <ul>
+          <li>Trains learners to guess the expected answer rather than reason</li>
+          <li>Implies a single correct view of leadership, which rarely exists</li>
+          <li>The sense of being tested quietly shuts down candour</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <span class="tag">My choice</span>
+        <h3>Ranking, justified in your own words</h3>
+        <ul>
+          <li>No answer key, so there is nothing to get wrong and it stays safe</li>
+          <li>Surfaces reasoning a facilitator can build a discussion on</li>
+          <li>Mirrors the real work of leadership: weighing competing goods under uncertainty</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- RANKING TOOL -->
+    <div class="demo-wrap amicomp rv">
+      <div class="cap"><span>Ranking activity · reflection, not assessment</span><b>No right answers</b></div>
+      <div class="rk">
+        <p class="rk-intro">There are no right answers. Order these by what matters most to you as a leader, then justify your top choice below.</p>
+        <ul class="rk-list" id="rkList" aria-label="Rank the qualities of a modern leader by your own view"></ul>
+        <div class="rk-bar">
+          <button class="solid" id="rkShuffle" type="button">Shuffle</button>
+          <button id="rkReset" type="button">Reset order</button>
+        </div>
+        <div class="rk-reflect">
+          <label id="rkPromptLabel" for="rkWhy">Why does this belong at the top for you?</label>
+          <textarea id="rkWhy" rows="3" placeholder="Your view, in your own words. Nothing here is marked. It is for your reflection and to share with the group."></textarea>
+          <p class="rk-hint">In a session, the facilitator uses the spread of answers across the cohort to open discussion. The red outline keeps each item trackable as it moves; arrows make it keyboard and touch friendly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose rv" style="margin-top:8px">
+      <h3>The decisions behind them</h3>
+      <p>One palette, defined once as CSS variables, themes every component, so consistency holds across a growing library and a rebrand is a one-line change rather than a hunt across files. Each component is keyboard operable, honours reduced-motion, and works from a facilitator's laptop to a learner's phone. They ship by iframe so they stay intact inside whatever platform hosts them. This is design-system thinking and interaction design under real constraints, the same consistency-at-scale problem a maturing product suite has to solve.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTACT ============== -->
+<footer id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Get in touch</p>
+    <h2>Transforming complex user needs into thoughtful and impactful solutions.</h2>
+    <div class="frow">
+      <a class="mail" href="mailto:marine.mercy@gmail.com">marine.mercy@gmail.com</a>
+      <span>Mercy Marine · London, UK</span>
+      <span>+44 7534 430 755</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ---- flip cards ---- */
+  document.querySelectorAll('.fc').forEach(function(card){
+    card.addEventListener('click',function(){
+      var open = card.getAttribute('aria-pressed') === 'true';
+      card.setAttribute('aria-pressed', open ? 'false' : 'true');
+    });
+  });
+
+  /* ---- ranking tool ---- */
+  (function(){
+    var QUALITIES = [
+      {k:'integrity', label:'Integrity &amp; trustworthiness', sub:'Doing what you said you would', icon:'<svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>'},
+      {k:'aware', label:'Self-awareness &amp; emotional regulation', sub:'Knowing your effect on others', icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="10" r="0.6" fill="currentColor"/><circle cx="15" cy="10" r="0.6" fill="currentColor"/></svg>'},
+      {k:'comms', label:'Clear communication', sub:'Being understood, not just heard', icon:'<svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg>'},
+      {k:'decisive', label:'Decisiveness under uncertainty', sub:'Choosing with incomplete information', icon:'<svg viewBox="0 0 24 24"><path d="M4 12h10"/><path d="M11 8l4 4-4 4"/><path d="M18 5v14"/></svg>'},
+      {k:'adapt', label:'Adaptability', sub:'Changing course when facts change', icon:'<svg viewBox="0 0 24 24"><path d="M4 8a8 8 0 0 1 14-3"/><path d="M18 3v4h-4"/><path d="M20 16a8 8 0 0 1-14 3"/><path d="M6 21v-4h4"/></svg>'},
+      {k:'vision', label:'Vision &amp; strategic thinking', sub:'Seeing where this all has to go', icon:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/></svg>'},
+      {k:'expertise', label:'Domain expertise', sub:'Knowing the work itself', icon:'<svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 8v5M9.5 9.5l5 3"/></svg>'}
+    ];
+    var list = document.getElementById('rkList');
+    var order = QUALITIES.slice();
+    var dragEl = null;
+
+    function renderRanks(){
+      Array.prototype.forEach.call(list.children,function(li,i){
+        li.querySelector('.rk-rank').textContent = i+1;
+        li.querySelector('.up').disabled = (i===0);
+        li.querySelector('.down').disabled = (i===list.children.length-1);
+      });
+      updatePrompt();
+    }
+    function updatePrompt(){
+      var lbl=document.getElementById('rkPromptLabel');
+      var top=list.firstElementChild;
+      if(!lbl||!top) return;
+      var name=top.querySelector('.rk-label').childNodes[0].textContent.trim();
+      lbl.textContent='Why does '+name+' belong at the top for you?';
+    }
+    function build(){
+      list.innerHTML='';
+      order.forEach(function(q){
+        var li=document.createElement('li');
+        li.className='rk-item';li.draggable=true;li.dataset.k=q.k;
+        li.innerHTML =
+          '<span class="rk-rank"></span>'+
+          '<span class="rk-ico">'+q.icon+'</span>'+
+          '<span class="rk-label">'+q.label+'<small>'+q.sub+'</small></span>'+
+          '<span class="rk-moves">'+
+            '<button class="up" type="button" aria-label="Move up"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button>'+
+            '<button class="down" type="button" aria-label="Move down"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>'+
+          '</span>';
+        list.appendChild(li);
+      });
+      renderRanks();
+    }
+    function move(li,dir){
+      if(dir<0 && li.previousElementSibling) list.insertBefore(li,li.previousElementSibling);
+      if(dir>0 && li.nextElementSibling) list.insertBefore(li.nextElementSibling,li);
+      renderRanks();
+    }
+    list.addEventListener('click',function(e){
+      var btn=e.target.closest('button'); if(!btn) return;
+      move(btn.closest('.rk-item'), btn.classList.contains('up')?-1:1);
+    });
+    list.addEventListener('dragstart',function(e){
+      dragEl=e.target.closest('.rk-item'); if(!dragEl) return;
+      dragEl.classList.add('dragging');
+    });
+    list.addEventListener('dragend',function(){
+      if(dragEl){dragEl.classList.remove('dragging');dragEl=null;}
+      Array.prototype.forEach.call(list.children,function(li){li.classList.remove('lift');});
+      renderRanks();
+    });
+    list.addEventListener('dragover',function(e){
+      e.preventDefault(); if(!dragEl) return;
+      var after=null;
+      Array.prototype.forEach.call(list.querySelectorAll('.rk-item:not(.dragging)'),function(li){
+        var box=li.getBoundingClientRect();
+        if(e.clientY > box.top + box.height/2) after=li;
+      });
+      if(after && after.nextElementSibling!==dragEl) list.insertBefore(dragEl, after.nextElementSibling);
+      else if(!after && list.firstElementChild!==dragEl) list.insertBefore(dragEl, list.firstElementChild);
+    });
+    document.getElementById('rkShuffle').addEventListener('click',function(){
+      var items=Array.prototype.slice.call(list.children);
+      for(var i=items.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));list.insertBefore(items[j],items[i]);items=Array.prototype.slice.call(list.children);}
+      renderRanks();
+    });
+    document.getElementById('rkReset').addEventListener('click',build);
+    build();
+  })();
+
+  /* ---- scroll reveal ---- */
+  (function(){
+    document.body.classList.add('js');
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in');});
+      return;
+    }
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);} });
+    },{threshold:.12});
+    document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+  })();
+</script>
+</body>
+</html>
